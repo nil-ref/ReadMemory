@@ -12,12 +12,7 @@ void ScanMemory::initWithVlaue(unsigned long value) {
     mapVecFilterTag.push_back(moduleName);
     moduleVec.clear();
     HackEngine::getInstance()->getProcMapsModuleWithFilter(getpid(), moduleVec, mapVecFilterTag);
-//    for (ModuleMemoryInfo module:moduleVec) {
-//        cout << "start: " << hex << module.startAddress
-//             << ", end: " << hex << module.endAddress
-//             << ", attr: " << module.attr
-//             << ", name: " << module.name << endl;
-//    }
+//    printModuleInfo();
 
     for (ModuleMemoryInfo module:moduleVec) {
         for (unsigned long i = module.startAddress; i < module.endAddress; i += 4) {
@@ -34,29 +29,52 @@ void ScanMemory::initWithVlaue(unsigned long value) {
     }
 }
 
+void ScanMemory::printModuleInfo() const {
+    for (ModuleMemoryInfo module:moduleVec) {
+        cout << "start: " << hex << module.startAddress
+             << ", end: " << hex << module.endAddress
+             << ", attr: " << module.attr
+             << ", name: " << module.name << endl;
+    }
+}
+
 void ScanMemory::newValue(unsigned value) {
     lastSearchValue = value;
+    equal();
+}
+
+void ScanMemory::bigger() {
     vector<unsigned long> tempVec;
     for (unsigned long oldValueAddress:resultVec) {
-        if (*(unsigned long *) oldValueAddress != lastSearchValue) {
+        if (*(unsigned long *) oldValueAddress > lastSearchValue) {
             tempVec.push_back(oldValueAddress);
         }
     }
     resultVec = tempVec;
 }
 
-void ScanMemory::bigger() {
-
-}
-
 void ScanMemory::equal() {
-
+    vector<unsigned long> tempVec;
+    for (unsigned long oldValueAddress:resultVec) {
+        if (*(unsigned long *) oldValueAddress == lastSearchValue) {
+            tempVec.push_back(oldValueAddress);
+        }
+    }
+    resultVec = tempVec;
 }
 
 void ScanMemory::smaller() {
-
+    vector<unsigned long> tempVec;
+    for (unsigned long oldValueAddress:resultVec) {
+        if (*(unsigned long *) oldValueAddress < lastSearchValue) {
+            tempVec.push_back(oldValueAddress);
+        }
+    }
+    resultVec = tempVec;
 }
 
 void ScanMemory::restart() {
-
+    lastSearchValue = 0;
+    resultVec.clear();
+    moduleVec.clear();
 }

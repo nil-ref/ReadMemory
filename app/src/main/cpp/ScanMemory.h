@@ -34,6 +34,8 @@ private:
     string moduleName;
     vector<unsigned long> resultVec;
     vector<ModuleMemoryInfo> moduleVec;
+
+    void printModuleInfo() const;
 };
 
 
