@@ -6,7 +6,7 @@
 #define READMEMORY_HACKENGINE_H
 
 #include "Common.h"
-
+#include "ModuleMemoryInfo.h"
 class HackEngine {
 
 public:
@@ -22,7 +22,12 @@ private:
 public:
     int getProcMaps(int pid, vector<string> &vec);
 
-    void getProcMapsFilter(int pid, vector<string> &resultVec, const vector<string> &filterTagVec);
+    void getProcMapsWithFilter(int pid, vector<string> &resultVec,
+                               const vector<string> &filterTagVec);
+
+    void
+    getProcMapsModuleWithFilter(int pid, vector<ModuleMemoryInfo> &resultVec,
+                                const vector<string> &filterTagVec);
 };
 
 

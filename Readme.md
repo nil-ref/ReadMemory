@@ -70,3 +70,10 @@ b4800000-b5000000 rw-p 00000000 00:00 0          [anon:libc_malloc]
 1/ 解析程序的/proc/pid/maps，指定模块及malloc的相关区域内存
 2/ 等值、变大、变小扫描
 ```
+
+### 解决问题花费时间久的地方
+- 字符串转整形一直是0，用下面方法解决了。
+```
+module.startAddress = strtoul(addressVec[0].c_str(), NULL, 16);
+module.endAddress = strtoul(addressVec[1].c_str(), NULL, 16);
+```

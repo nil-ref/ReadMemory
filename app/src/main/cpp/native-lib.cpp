@@ -52,9 +52,18 @@ Java_com_example_mama_readmemory_MainActivity_search(
     vector<string> mapVecFilterTag;
     mapVecFilterTag.push_back("libc_malloc");
     mapVecFilterTag.push_back("libnative-lib.so");
-    HackEngine::getInstance()->getProcMapsFilter(pid, mapVecFilter, mapVecFilterTag);
+    HackEngine::getInstance()->getProcMapsWithFilter(pid, mapVecFilter, mapVecFilterTag);
     for (string str:mapVecFilter) {
         cout << str << endl;
     }
+    vector<ModuleMemoryInfo> moduleVec;
 
+    HackEngine::getInstance()->getProcMapsModuleWithFilter(pid, moduleVec, mapVecFilter);
+
+    for (ModuleMemoryInfo module:moduleVec) {
+        cout << "start: " << hex << module.startAddress
+             << ", end: " << hex << module.endAddress
+             << ", attr: " << module.attr
+             << ", name: " << module.name << endl;
+    }
 }

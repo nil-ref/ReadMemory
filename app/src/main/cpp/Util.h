@@ -122,6 +122,14 @@ public:
     static void string_trim(string &s);
 
     /**
+     * 字符串切割
+     * @param str 原始字符串的副本
+     * @param pattern 要切割的内容
+     * @return 切割后结果
+     */
+    static vector<string> string_split(string str, string pattern);
+
+    /**
      * 以某字符串开头
      * @param mainstr 主串
      * @param substr 子串
@@ -165,6 +173,8 @@ public:
 
 private:
     static void checkCmdLength(const string &cmd);
+
+
 };
 
 #endif
