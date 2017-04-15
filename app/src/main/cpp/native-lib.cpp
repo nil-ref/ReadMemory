@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <string>
 #include "Util.h"
+#include "HackEngine.h"
 
 extern "C"
 JNIEXPORT jstring JNICALL
@@ -37,4 +38,23 @@ Java_com_example_mama_readmemory_MainActivity_search(
         }
     }
     cout << "finish. the value of " << value << "'s count is: " << vec.size() << endl;
+    int pid = getpid();
+    cout << "pid = " << pid << endl;
+    vector<string> mapVec;
+    HackEngine::getInstance()->getProcMaps(pid, mapVec);
+    for (string str:mapVec) {
+        cout << str << endl;
+    }
+
+    cout << "after filter:" << endl;
+
+    vector<string> mapVecFilter;
+    vector<string> mapVecFilterTag;
+    mapVecFilterTag.push_back("libc_malloc");
+    mapVecFilterTag.push_back("libnative-lib.so");
+    HackEngine::getInstance()->getProcMapsFilter(pid, mapVecFilter, mapVecFilterTag);
+    for (string str:mapVecFilter) {
+        cout << str << endl;
+    }
+
 }

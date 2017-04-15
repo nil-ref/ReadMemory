@@ -10,9 +10,20 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
         externalNativeBuild {
+
+            // For ndk-build, instead use ndkBuild {}
             cmake {
-                cppFlags ""
+
+                // Passes optional arguments to CMake.
+//                arguments "-DCMAKE_VERBOSE_MAKEFILE=TRUE"
+
+                // Sets optional flags for the C compiler.
+//                cFlags "-D_EXAMPLE_C_FLAG1", "-D_EXAMPLE_C_FLAG2"
+
+                // Sets a flag to enable format macro constants for the C++ compiler.
+                cppFlags "-std=c++11"
             }
         }
     }

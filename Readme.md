@@ -3,13 +3,14 @@
 #### cout输出到logcat
 
 ```
+# 方式一、设置属性
 adb shell
 su
 stop
 setprop log.redirect-stdio true
 start
 
-# 代码入口重定向到文件
+# 方式二、代码入口重定向到文件
 freopen("/sdcard/tmp/loglog.txt", "w", stdout);
 ```
 
@@ -61,4 +62,11 @@ pointer: 0xb4b38be0
 
 b4800000-b5000000 rw-p 00000000 00:00 0          [anon:libc_malloc]
 # 内存落在libc_malloc区域，堆上
+```
+
+### 内容
+
+```
+1/ 解析程序的/proc/pid/maps，指定模块及malloc的相关区域内存
+2/ 等值、变大、变小扫描
 ```
