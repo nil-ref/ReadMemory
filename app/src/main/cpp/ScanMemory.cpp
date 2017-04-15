@@ -42,7 +42,7 @@ void ScanMemory::newValue(unsigned value) {
             tempVec.push_back(oldValueAddress);
         }
     }
-    //resultVec = tempVec;
+    resultVec = tempVec;
 }
 
 void ScanMemory::bigger() {
