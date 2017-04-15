@@ -27,7 +27,7 @@ public:
 
     void smaller();
 
-    void restart();
+    void clear();
 
 private:
     unsigned long lastSearchValue;
@@ -36,6 +36,8 @@ private:
     vector<ModuleMemoryInfo> moduleVec;
 
     void printModuleInfo() const;
+
+    void printResult() const;
 };
 
 

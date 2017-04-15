@@ -22,10 +22,10 @@
         android:text="执行" />
 
     <Button
-        android:id="@+id/temp1"
+        android:id="@+id/scan_memory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="temp1" />
+        android:text="内存扫描测试" />
 
     <Button
         android:id="@+id/temp2"

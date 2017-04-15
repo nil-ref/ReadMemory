@@ -21,8 +21,12 @@ void ScanMemory::initWithVlaue(unsigned long value) {
             }
         }
     }
-    cout << "search : [" << value << "], found count : [" << resultVec.size() << "]." << endl;
-    if (resultVec.size() < 10) {
+    printResult();
+}
+
+void ScanMemory::printResult( ) const {
+    cout << "test : [" << lastSearchValue << "], found count : [" << resultVec.size() << "]." << endl;
+    if (resultVec.size() < 20) {
         for (unsigned long address:resultVec) {
             cout << "address: " << hex << address << endl;
         }
@@ -51,6 +55,7 @@ void ScanMemory::bigger() {
         }
     }
     resultVec = tempVec;
+    printResult();
 }
 
 void ScanMemory::equal() {
@@ -61,6 +66,7 @@ void ScanMemory::equal() {
         }
     }
     resultVec = tempVec;
+    printResult();
 }
 
 void ScanMemory::smaller() {
@@ -71,9 +77,10 @@ void ScanMemory::smaller() {
         }
     }
     resultVec = tempVec;
+    printResult();
 }
 
-void ScanMemory::restart() {
+void ScanMemory::clear() {
     lastSearchValue = 0;
     resultVec.clear();
     moduleVec.clear();
