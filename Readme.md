@@ -78,4 +78,20 @@ b4800000-b5000000 rw-p 00000000 00:00 0          [anon:libc_malloc]
 ```
 module.startAddress = strtoul(addressVec[0].c_str(), NULL, 16);
 module.endAddress = strtoul(addressVec[1].c_str(), NULL, 16);
+
+### lldb如何用命令行附加
+
+```
+04/17 20:53:14: Launching app3
+No apk changes detected since last installation, skipping installation of D:\workspace\my-git\DebugTest2\app3\build\outputs\apk\app3-debug.apk
+$ adb shell am force-stop com.example.com.app3
+$ adb shell am start -n "com.example.com.app3/com.example.com.app3.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -D
+Connecting to com.example.com.app3
+Now Launching Native Debug Session
+Starting LLDB server: /data/data/com.example.com.app3/lldb/bin/start_lldb_server.sh /data/data/com.example.com.app3/lldb unix-abstract /data/data/com.example.com.app3/lldb/tmp platform-1492433596210.sock "lldb process:gdb-remote packets"
+$ adb shell cat /data/local/tmp/lldb-server | run-as com.example.com.app3 sh -c 'cat > /data/data/com.example.com.app3/lldb/bin/lldb-server && chmod 700 /data/data/com.example.com.app3/lldb/bin/lldb-server'
+$ adb shell cat /data/local/tmp/start_lldb_server.sh | run-as com.example.com.app3 sh -c 'cat > /data/data/com.example.com.app3/lldb/bin/start_lldb_server.sh && chmod 700 /data/data/com.example.com.app3/lldb/bin/start_lldb_server.sh'
+Debugger attached to process 3601
+
+```
 ```
