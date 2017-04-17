@@ -75,9 +75,11 @@ b4800000-b5000000 rw-p 00000000 00:00 0          [anon:libc_malloc]
 
 ### 解决问题花费时间久的地方
 - 字符串转整形一直是0，用下面方法解决了。
+
 ```
 module.startAddress = strtoul(addressVec[0].c_str(), NULL, 16);
 module.endAddress = strtoul(addressVec[1].c_str(), NULL, 16);
+```
 
 ### lldb如何用命令行附加
 
@@ -92,6 +94,4 @@ Starting LLDB server: /data/data/com.example.com.app3/lldb/bin/start_lldb_server
 $ adb shell cat /data/local/tmp/lldb-server | run-as com.example.com.app3 sh -c 'cat > /data/data/com.example.com.app3/lldb/bin/lldb-server && chmod 700 /data/data/com.example.com.app3/lldb/bin/lldb-server'
 $ adb shell cat /data/local/tmp/start_lldb_server.sh | run-as com.example.com.app3 sh -c 'cat > /data/data/com.example.com.app3/lldb/bin/start_lldb_server.sh && chmod 700 /data/data/com.example.com.app3/lldb/bin/start_lldb_server.sh'
 Debugger attached to process 3601
-
-```
 ```
