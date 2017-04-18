@@ -70,7 +70,8 @@ b4800000-b5000000 rw-p 00000000 00:00 0          [anon:libc_malloc]
 1/ 解析程序的/proc/pid/maps，指定模块及malloc的相关区域内存 ok
 2/ 等值、变大、变小扫描 ok
 3/ 可以用Android studio的lldb命令窗口对内存地址进行读写断点及打印堆栈了 ok
-4/ 不用studio，通过lldb直接附加及调试程序，获取关心内存的读写堆栈。
+4/ 不用studio，通过lldb直接附加及调试程序，获取关心内存的读写堆栈。(可以试试用studio附加其他进程)。studio里的项目包名修改成跟要附加的一样的
+5/ so文件如何注入到其他进程中来搜索其他进程的内存。
 ```
 
 ### 解决问题花费时间久的地方
@@ -80,6 +81,8 @@ b4800000-b5000000 rw-p 00000000 00:00 0          [anon:libc_malloc]
 module.startAddress = strtoul(addressVec[0].c_str(), NULL, 16);
 module.endAddress = strtoul(addressVec[1].c_str(), NULL, 16);
 ```
+
+- studio附加其他进程，[参考](https://github.com/dodola/BinderDebug)
 
 ### lldb如何用命令行附加
 
@@ -95,3 +98,5 @@ $ adb shell cat /data/local/tmp/lldb-server | run-as com.example.com.app3 sh -c 
 $ adb shell cat /data/local/tmp/start_lldb_server.sh | run-as com.example.com.app3 sh -c 'cat > /data/data/com.example.com.app3/lldb/bin/start_lldb_server.sh && chmod 700 /data/data/com.example.com.app3/lldb/bin/start_lldb_server.sh'
 Debugger attached to process 3601
 ```
+
+### lldb相关命令
